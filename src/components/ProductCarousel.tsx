@@ -3,9 +3,11 @@
 import { useRef, useState, useEffect, useCallback, memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useCart } from "@/contexts/CartContext";
 
-interface Product {
-  id: number;
+interface DisplayProduct {
+  id: string;
+  handle: string;
   name: string;
   brand: string;
   price: number;
@@ -15,11 +17,14 @@ interface Product {
   href: string;
   isNew?: boolean;
   isSale?: boolean;
+  variantId?: string;
 }
 
-const products: Product[] = [
+// Mock products as fallback when Shopify has no products
+const mockProducts: DisplayProduct[] = [
   {
-    id: 1,
+    id: "1",
+    handle: "pace-lite-tank",
     name: "Pace Lite Tank",
     brand: "District Vision",
     price: 95,
@@ -29,7 +34,8 @@ const products: Product[] = [
     isNew: true,
   },
   {
-    id: 2,
+    id: "2",
+    handle: "speed-short",
     name: "Speed Short 5\"",
     brand: "Bandit Running",
     price: 78,
@@ -38,7 +44,8 @@ const products: Product[] = [
     href: "/products/speed-short",
   },
   {
-    id: 3,
+    id: "3",
+    handle: "ultra-running-tee",
     name: "Ultra Running Tee",
     brand: "Soar",
     price: 110,
@@ -49,7 +56,8 @@ const products: Product[] = [
     isSale: true,
   },
   {
-    id: 4,
+    id: "4",
+    handle: "long-distance-jacket",
     name: "Long Distance Jacket",
     brand: "Satisfy",
     price: 285,
@@ -59,7 +67,8 @@ const products: Product[] = [
     isNew: true,
   },
   {
-    id: 5,
+    id: "5",
+    handle: "compression-tight",
     name: "Compression Tight",
     brand: "District Vision",
     price: 145,
@@ -68,7 +77,8 @@ const products: Product[] = [
     href: "/products/compression-tight",
   },
   {
-    id: 6,
+    id: "6",
+    handle: "trail-cap",
     name: "Trail Cap",
     brand: "Ciele",
     price: 45,
@@ -78,6 +88,38 @@ const products: Product[] = [
     isNew: true,
   },
 ];
+
+interface ShopifyProduct {
+  id: string;
+  handle: string;
+  title: string;
+  vendor: string;
+  price: number;
+  compareAtPrice: number | null;
+  images: string[];
+  variants: { id: string; title: string; available: boolean; price: number }[];
+  isNew: boolean;
+  isSale: boolean;
+}
+
+// Transform Shopify product to display format
+function transformToDisplayProduct(product: ShopifyProduct): DisplayProduct {
+  const firstVariant = product.variants[0];
+  return {
+    id: product.id,
+    handle: product.handle,
+    name: product.title,
+    brand: product.vendor,
+    price: product.price,
+    originalPrice: product.compareAtPrice || undefined,
+    image: product.images[0] || "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80",
+    hoverImage: product.images[1] || product.images[0] || "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600&q=80",
+    href: `/products/${product.handle}`,
+    isNew: product.isNew,
+    isSale: product.isSale,
+    variantId: firstVariant?.id,
+  };
+}
 
 // Memoized arrow icons
 const ArrowIcon = memo(({ direction }: { direction: "left" | "right" }) => (
@@ -93,7 +135,7 @@ const ArrowIcon = memo(({ direction }: { direction: "left" | "right" }) => (
 ArrowIcon.displayName = "ArrowIcon";
 
 // Memoized Product Card
-const ProductCard = memo(({ product, index }: { product: Product; index: number }) => (
+const ProductCard = memo(({ product, index, onQuickAdd }: { product: DisplayProduct; index: number; onQuickAdd: (product: DisplayProduct) => void }) => (
   <Link
     href={product.href}
     className="product-card flex-shrink-0 w-64 sm:w-72 group"
@@ -142,7 +184,7 @@ const ProductCard = memo(({ product, index }: { product: Product; index: number 
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            // Add to cart logic here
+            onQuickAdd(product);
           }}
         >
           Quick Add
@@ -173,10 +215,63 @@ const ProductCard = memo(({ product, index }: { product: Product; index: number 
 ));
 ProductCard.displayName = "ProductCard";
 
+// Loading skeleton
+const ProductSkeleton = memo(() => (
+  <div className="flex-shrink-0 w-64 sm:w-72">
+    <div className="relative aspect-[3/4] bg-gray-200 rounded-sm animate-pulse mb-4" />
+    <div className="px-0.5 space-y-2">
+      <div className="h-3 w-20 bg-gray-200 rounded animate-pulse" />
+      <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+      <div className="h-4 w-16 bg-gray-200 rounded animate-pulse" />
+    </div>
+  </div>
+));
+ProductSkeleton.displayName = "ProductSkeleton";
+
 export default function ProductCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [products, setProducts] = useState<DisplayProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useCart();
+
+  // Fetch products from Shopify via API
+  useEffect(() => {
+    async function fetchProducts() {
+      setIsLoading(true);
+      try {
+        const res = await fetch("/api/products");
+        const data = await res.json();
+
+        if (data.products && data.products.length > 0) {
+          setProducts(data.products.map(transformToDisplayProduct));
+        } else {
+          // Fallback to mock data if no Shopify products
+          setProducts(mockProducts);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setProducts(mockProducts);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
+
+  const handleQuickAdd = useCallback((product: DisplayProduct) => {
+    addToCart({
+      id: product.id,
+      variantId: product.variantId || `${product.id}-default`,
+      title: product.name,
+      variant: "Default",
+      price: product.price,
+      compareAtPrice: product.originalPrice,
+      image: product.image,
+      handle: product.handle,
+    });
+  }, [addToCart]);
 
   const checkScroll = useCallback(() => {
     if (scrollRef.current) {
@@ -197,7 +292,7 @@ export default function ProductCarousel() {
         window.removeEventListener("resize", checkScroll);
       };
     }
-  }, [checkScroll]);
+  }, [checkScroll, products]);
 
   const scroll = useCallback((direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -257,11 +352,20 @@ export default function ProductCarousel() {
           ref={scrollRef}
           className="flex gap-4 sm:gap-6 overflow-x-auto hide-scrollbar pb-4 -mx-4 px-4 scroll-smooth snap-x snap-mandatory"
         >
-          {products.map((product, index) => (
-            <div key={product.id} className="snap-start">
-              <ProductCard product={product} index={index} />
-            </div>
-          ))}
+          {isLoading ? (
+            // Loading skeletons
+            Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className="snap-start">
+                <ProductSkeleton />
+              </div>
+            ))
+          ) : (
+            products.map((product, index) => (
+              <div key={product.id} className="snap-start">
+                <ProductCard product={product} index={index} onQuickAdd={handleQuickAdd} />
+              </div>
+            ))
+          )}
         </div>
 
         {/* Mobile scroll hint */}

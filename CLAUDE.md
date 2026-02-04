@@ -25,16 +25,17 @@ npm run lint     # Run ESLint
 - `src/app/globals.css` - Tailwind import + custom CSS utilities and animations
 
 **Page composition:** The home page (`src/app/page.tsx`) composes modular section components in order:
-Navigation → Hero → BrandMarquee → ProductCarousel → Categories → Features → BrandShowcase → Testimonials → Community → Newsletter → InstagramFeed → Footer
+Navigation → Hero → BrandMarquee → ProductCarousel → Categories → Features → BrandShowcase → Community → Newsletter → InstagramFeed → Footer
 
 **Styling approach:**
 - Tailwind utility classes for component styling
-- Custom CSS utilities in `globals.css`: `.btn-primary`, `.btn-secondary`, `.btn-white`, `.glass`, `.hover-lift`
-- Animation classes: `.animate-fadeInUp`, `.animate-slideInLeft`, `.stagger-1` through `.stagger-6`
-- Theme variables: `--background`, `--foreground`, `--accent`, `--muted`, `--border`
+- Custom CSS utilities in `globals.css`: `.btn-primary`, `.btn-secondary`, `.btn-white`, `.glass`, `.glass-dark`, `.hover-lift`
+- Animation classes: `.animate-fadeInUp`, `.animate-fadeIn`, `.animate-slideInLeft`, `.animate-slideInRight`, `.animate-scaleIn`, `.animate-float`, `.animate-shimmer`, `.animate-slideDown`
+- Stagger delays: `.stagger-1` through `.stagger-6`
+- Theme variables: `--background`, `--foreground`, `--accent`, `--accent-light`, `--muted`, `--border`, `--success`, `--dark-primary`, `--dark-secondary`, `--dark-tertiary`
 
-**Image handling:** Remote images from Unsplash are configured in `next.config.ts`. Add new remote domains to `images.remotePatterns` before using external image sources.
+**Image handling:** Remote images from Unsplash and Facebook CDN are configured in `next.config.ts`. Add new remote domains to `images.remotePatterns` before using external image sources.
 
-**Font:** Inter loaded via `next/font/google` with CSS variable `--font-inter`
+**Fonts:** Outfit (display/headings via `.font-display`) and DM Sans (body via `--font-sans`) loaded via Google Fonts import in `globals.css`.
 
 **Path alias:** `@/*` maps to `./src/*`

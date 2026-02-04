@@ -1,19 +1,15 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import CollectionPage from "@/components/CollectionPage";
 
 export default function WomenNewPage() {
   return (
-    <main className="min-h-screen">
-      <Navigation />
-      <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-[#0d0d0d] mb-6">
-          Women&apos;s New Arrivals
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl">
-          The latest women&apos;s running gear. Coming soon.
-        </p>
-      </div>
-      <Footer />
-    </main>
+    <CollectionPage
+      title="Women's New Arrivals"
+      description="Just landed. The newest women's running gear from the world's best brands."
+      collectionHandle="womens-new-arrivals"
+      breadcrumbs={[
+        { label: "Women", href: "/women" },
+        { label: "New Arrivals", href: "/women/new" },
+      ]}
+    />
   );
 }

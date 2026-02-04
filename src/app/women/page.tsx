@@ -1,19 +1,20 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import CollectionPage from "@/components/CollectionPage";
 
 export default function WomenPage() {
   return (
-    <main className="min-h-screen">
-      <Navigation />
-      <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-[#0d0d0d] mb-6">
-          Women&apos;s Running Apparel
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl">
-          Premium performance gear designed for female runners. Coming soon.
-        </p>
-      </div>
-      <Footer />
-    </main>
+    <CollectionPage
+      title="Women's Running Apparel"
+      description="Engineered for the female athlete. Performance, fit, and style without compromise."
+      collectionHandle="womens"
+      breadcrumbs={[{ label: "Women", href: "/women" }]}
+      subcategories={[
+        { label: "New Arrivals", href: "/women/new" },
+        { label: "Tees & Tanks", href: "/women/tees" },
+        { label: "Sports Bras", href: "/women/bras" },
+        { label: "Shorts & Skirts", href: "/women/shorts" },
+        { label: "Pants & Tights", href: "/women/pants" },
+        { label: "Accessories", href: "/women/accessories" },
+      ]}
+    />
   );
 }

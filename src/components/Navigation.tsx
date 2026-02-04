@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, memo } from "react";
 import Link from "next/link";
+import { useCart } from "@/contexts/CartContext";
 
 const navItems = [
   {
@@ -93,6 +94,7 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
+  const { itemCount, openCart } = useCart();
 
   // Optimized scroll handler with requestAnimationFrame
   useEffect(() => {
@@ -247,15 +249,18 @@ export default function Navigation() {
 
               {/* Cart */}
               <button
+                onClick={openCart}
                 className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-black/5 transition-colors relative ${
                   isScrolled ? "text-[#0d0d0d]" : "text-white"
                 }`}
-                aria-label="Shopping bag (2 items)"
+                aria-label={`Shopping bag${itemCount > 0 ? ` (${itemCount} items)` : ""}`}
               >
                 <BagIcon />
-                <span className="absolute top-1 right-1 bg-[#e63946] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                  2
-                </span>
+                {itemCount > 0 && (
+                  <span className="absolute top-1 right-1 bg-[#e63946] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+                    {itemCount > 9 ? "9+" : itemCount}
+                  </span>
+                )}
               </button>
             </div>
           </div>
