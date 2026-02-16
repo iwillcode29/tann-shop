@@ -89,12 +89,16 @@ const ChevronIcon = memo(({ className }: { className?: string }) => (
 ));
 ChevronIcon.displayName = "ChevronIcon";
 
-export default function Navigation() {
+export default function Navigation({ variant = "light" }: { variant?: "light" | "dark" }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
+  const [isShowAnnouncementBar, setIsShowAnnouncementBar] = useState(true);
   const { itemCount, openCart } = useCart();
+
+  // When variant is "dark", use dark text even before scrolling
+  const useDarkText = variant === "dark" || isScrolled;
 
   // Optimized scroll handler with requestAnimationFrame
   useEffect(() => {
@@ -138,7 +142,8 @@ export default function Navigation() {
   return (
     <>
       {/* Announcement Bar */}
-      <div
+      {isShowAnnouncementBar && (
+        <div
         className={`fixed top-0 left-0 right-0 z-50 text-center py-2.5 text-xs font-medium tracking-wider transition-all duration-300 ${
           isScrolled
             ? "bg-[#0d0d0d] text-white h-0 py-0 overflow-hidden opacity-0"
@@ -149,13 +154,16 @@ export default function Navigation() {
         <span className="mx-3 text-white/30">|</span>
         <span className="text-white/80">USE CODE: <span className="font-semibold text-white">RUNFAST</span></span>
       </div>
+      )}
 
       {/* Main Navigation */}
       <nav
         className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "top-0 bg-white/98 backdrop-blur-md shadow-sm"
-            : "top-10 bg-transparent"
+            : variant === "dark"
+              ? "top-10 bg-white/98 backdrop-blur-md"
+              : "top-10 bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -167,7 +175,7 @@ export default function Navigation() {
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
-              <span className={`transition-colors ${isScrolled ? "text-[#0d0d0d]" : "text-white"}`}>
+              <span className={`transition-colors ${useDarkText ? "text-[#0d0d0d]" : "text-white"}`}>
                 {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
               </span>
             </button>
@@ -184,7 +192,7 @@ export default function Navigation() {
                   <Link
                     href={item.href}
                     className={`nav-link flex items-center gap-1 text-[13px] font-display font-medium tracking-wide uppercase transition-colors py-2 ${
-                      isScrolled
+                      useDarkText
                         ? "text-[#0d0d0d] hover:text-black"
                         : "text-white hover:text-white/80"
                     }`}
@@ -219,7 +227,7 @@ export default function Navigation() {
             <Link
               href="/"
               className={`absolute left-1/2 -translate-x-1/2 text-2xl lg:text-3xl font-display font-bold tracking-tight transition-colors ${
-                isScrolled ? "text-[#0d0d0d]" : "text-white"
+                useDarkText ? "text-[#0d0d0d]" : "text-white"
               }`}
             >
               TANN
@@ -230,7 +238,7 @@ export default function Navigation() {
               {/* Search */}
               <button
                 className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-black/5 transition-colors ${
-                  isScrolled ? "text-[#0d0d0d]" : "text-white"
+                  useDarkText ? "text-[#0d0d0d]" : "text-white"
                 }`}
                 aria-label="Search"
               >
@@ -240,7 +248,7 @@ export default function Navigation() {
               {/* Account - Hidden on small mobile */}
               <button
                 className={`hidden sm:flex p-2 min-w-[44px] min-h-[44px] items-center justify-center rounded-full hover:bg-black/5 transition-colors ${
-                  isScrolled ? "text-[#0d0d0d]" : "text-white"
+                  useDarkText ? "text-[#0d0d0d]" : "text-white"
                 }`}
                 aria-label="Account"
               >
@@ -251,7 +259,7 @@ export default function Navigation() {
               <button
                 onClick={openCart}
                 className={`p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-black/5 transition-colors relative ${
-                  isScrolled ? "text-[#0d0d0d]" : "text-white"
+                  useDarkText ? "text-[#0d0d0d]" : "text-white"
                 }`}
                 aria-label={`Shopping bag${itemCount > 0 ? ` (${itemCount} items)` : ""}`}
               >

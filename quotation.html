@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ใบเสนอราคา — TANN Shop E-Commerce</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Sarabun:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --accent: #e63946;
+      --gray-50: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-300: #d4d4d4;
+      --gray-400: #a3a3a3;
+      --gray-500: #737373;
+      --gray-600: #525252;
+      --gray-700: #404040;
+      --gray-800: #262626;
+      --gray-900: #171717;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Sarabun', 'DM Sans', sans-serif;
+      background: #f0f0f0;
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: white;
+      padding: 0;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: var(--black);
+      color: white;
+      padding: 40px 48px 36px;
+      position: relative;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #ff6b6b, var(--accent));
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 6px;
+    }
+
+    .doc-type {
+      text-align: right;
+    }
+
+    .doc-type h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .doc-type .doc-no {
+      font-size: 24px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+    }
+
+    .header-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .info-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .info-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      font-weight: 600;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: white;
+      font-weight: 500;
+    }
+
+    /* Content */
+    .content {
+      padding: 36px 48px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gray-100);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-heading::before {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* Project Info */
+    .project-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--gray-50);
+      border-radius: 8px;
+      padding: 16px 20px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .project-card .label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .project-card .value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .items-table th {
+      background: var(--gray-900);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .items-table th:first-child {
+      border-radius: 6px 0 0 0;
+      width: 40px;
+      text-align: center;
+    }
+
+    .items-table th:last-child {
+      border-radius: 0 6px 0 0;
+      text-align: right;
+    }
+
+    .items-table th:nth-child(3) {
+      text-align: right;
+      width: 100px;
+    }
+
+    .items-table td {
+      padding: 12px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: top;
+    }
+
+    .items-table td:first-child {
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: var(--gray-400);
+    }
+
+    .items-table td:nth-child(3) {
+      text-align: right;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .items-table td:last-child {
+      text-align: right;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .items-table tr:hover {
+      background: var(--gray-50);
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+
+    .item-desc {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    .items-table .subtotal-row td {
+      border-top: 2px solid var(--gray-200);
+      border-bottom: none;
+      padding-top: 14px;
+    }
+
+    .items-table .total-row td {
+      background: var(--gray-900);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px;
+      border-bottom: none;
+    }
+
+    .items-table .total-row td:first-child {
+      border-radius: 0 0 0 6px;
+    }
+
+    .items-table .total-row td:last-child {
+      border-radius: 0 0 6px 0;
+    }
+
+    .items-table .discount-row td {
+      color: var(--accent);
+      font-weight: 600;
+      border-bottom: none;
+    }
+
+    /* Package Selection */
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .pkg {
+      border: 2px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .pkg.selected {
+      border-color: var(--accent);
+      background: rgba(230,57,70,0.03);
+    }
+
+    .pkg.selected::after {
+      content: 'SELECTED';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 2px 12px;
+      border-radius: 10px;
+    }
+
+    .pkg-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+
+    .pkg-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .pkg-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .pkg-price span {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-500);
+    }
+
+    .pkg.selected .pkg-price {
+      color: var(--accent);
+    }
+
+    /* Terms */
+    .terms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .terms-col h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray-700);
+      margin-bottom: 10px;
+    }
+
+    .terms-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .terms-col li {
+      font-size: 12px;
+      color: var(--gray-600);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .terms-col li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Payment */
+    .payment-boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .pay-box {
+      background: var(--gray-50);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--gray-200);
+    }
+
+    .pay-box .pay-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .pay-box .pay-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .pay-box .pay-when {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    .payment-note {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-align: center;
+      padding: 8px;
+      background: var(--gray-50);
+      border-radius: 6px;
+    }
+
+    /* Signatures */
+    .signatures {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 2px solid var(--gray-100);
+    }
+
+    .sig-block {
+      text-align: center;
+    }
+
+    .sig-line {
+      width: 200px;
+      border-bottom: 1px solid var(--gray-300);
+      margin: 48px auto 8px;
+    }
+
+    .sig-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .sig-role {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    .sig-date {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    .page-footer {
+      background: var(--gray-50);
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--gray-200);
+      margin-top: 32px;
+    }
+
+    .footer-left {
+      font-size: 10px;
+      color: var(--gray-400);
+    }
+
+    .footer-right {
+      font-size: 10px;
+      color: var(--gray-400);
+    }
+
+    .stamp {
+      display: inline-block;
+      border: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 6px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transform: rotate(-5deg);
+      opacity: 0.8;
+    }
+
+    /* Valid badge */
+    .valid-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(230,57,70,0.06);
+      border: 1px solid rgba(230,57,70,0.2);
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    .valid-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* Page 2 */
+    .page-break {
+      page-break-before: always;
+    }
+
+    /* Checklist */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    .check-box {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--gray-300);
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .check-box.checked {
+      background: var(--accent);
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .check-box.checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      width: 4px;
+      height: 7px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+
+    /* Exclusions */
+    .exclusion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .exclusion-item {
+      font-size: 12px;
+      color: var(--gray-500);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .exclusion-item::before {
+      content: '×';
+      position: absolute;
+      left: 0;
+      color: var(--gray-400);
+      font-weight: 700;
+    }
+
+    /* Monthly costs */
+    .monthly-table th {
+      background: var(--gray-100);
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      padding: 10px 16px;
+      text-align: left;
+    }
+
+    .monthly-table td {
+      padding: 10px 16px;
+      font-size: 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    .monthly-table td:last-child {
+      text-align: right;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(230,57,70,0.04), rgba(230,57,70,0.01));
+      border: 1px solid rgba(230,57,70,0.15);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .highlight-box h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .highlight-box p {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* No print background */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+      }
+      .page-break { page-break-before: always; }
+    }
+
+    @media screen and (max-width: 800px) {
+      .page {
+        width: 100%;
+        margin: 0;
+        min-height: auto;
+      }
+      .header, .content { padding-left: 24px; padding-right: 24px; }
+      .packages { grid-template-columns: 1fr; }
+      .terms-grid { grid-template-columns: 1fr; }
+      .signatures { grid-template-columns: 1fr; gap: 24px; }
+      .project-info { grid-template-columns: 1fr; }
+      .payment-boxes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div>
+          <div class="logo">TANN</div>
+          <div style="font-size: 11px; color: var(--gray-400); letter-spacing: 2px; margin-top: 2px;">PREMIUM RUNNING APPAREL</div>
+        </div>
+        <div class="doc-type">
+          <h1>Quotation</h1>
+          <div class="doc-no">ใบเสนอราคา</div>
+        </div>
+      </div>
+      <div class="header-info">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="info-group">
+            <div class="info-label">เลขที่เอกสาร</div>
+            <div class="info-value">QT-2026-001</div>
+          </div>
+          <div class="info-group">
+            <div class="info-label">วันที่ออก</div>
+            <div class="info-value" id="issueDate"></div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="info-group">
+            <div class="info-label">เสนอให้</div>
+            <div class="info-value">TANN (เจ้าของแบรนด์)</div>
+          </div>
+          <div class="info-group">
+            <div class="info-label">ใบเสนอราคามีผลถึง</div>
+            <div class="info-value" id="validDate"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Project Info -->
+      <div class="section">
+        <div class="section-heading">ข้อมูลโปรเจกต์</div>
+        <div class="project-info">
+          <div class="project-card">
+            <div class="label">ชื่อโปรเจกต์</div>
+            <div class="value">TANN Shop — E-Commerce Platform</div>
+          </div>
+          <div class="project-card">
+            <div class="label">ประเภทงาน</div>
+            <div class="value">พัฒนาเว็บไซต์ E-Commerce</div>
+          </div>
+          <div class="project-card">
+            <div class="label">เทคโนโลยี</div>
+            <div class="value">Next.js 16 + React 19 + Shopify</div>
+          </div>
+          <div class="project-card">
+            <div class="label">สถานะ</div>
+            <div class="value" style="color: var(--accent);">สร้างเสร็จแล้ว พร้อมส่งมอบ</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Package Selection -->
+      <div class="section">
+        <div class="section-heading">แพ็คเกจที่เสนอ</div>
+        <div class="packages">
+          <div class="pkg" onclick="selectPkg(this, 'A')">
+            <div class="pkg-name">Package A</div>
+            <div class="pkg-title">Landing Page Only</div>
+            <div class="pkg-price">&#3647;30,000</div>
+          </div>
+          <div class="pkg" onclick="selectPkg(this, 'B')">
+            <div class="pkg-name">Package B</div>
+            <div class="pkg-title">+ Shopify Integration</div>
+            <div class="pkg-price">&#3647;48,000</div>
+          </div>
+          <div class="pkg selected" onclick="selectPkg(this, 'C')">
+            <div class="pkg-name">Package C</div>
+            <div class="pkg-title">Full Package</div>
+            <div class="pkg-price">&#3647;65,000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <div class="section">
+        <div class="section-heading">รายละเอียดงาน (แพ็คเกจ B)</div>
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>รายการ</th>
+              <th>มูลค่า (฿)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <div class="item-name">UI/UX Design — 10 Sections</div>
+                <div class="item-desc">ออกแบบ Landing Page ครบทุก section: Navigation, Hero, Brand Marquee, Product Carousel, Categories, Features, Brand Showcase, Community, Newsletter, Footer</div>
+              </td>
+              <td>15,000</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <div class="item-name">Responsive Design</div>
+                <div class="item-desc">รองรับ Mobile, Tablet, Desktop ทุกหน้า พร้อม Mobile Filter Drawer</div>
+              </td>
+              <td>5,000</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <div class="item-name">Animations & Micro-interactions</div>
+                <div class="item-desc">Fade-in, Slide transitions, Hover effects, Scroll animations, Staggered delays</div>
+              </td>
+              <td>4,000</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <div class="item-name">Collection Pages — 14 หน้า + Filter System</div>
+                <div class="item-desc">Men 7 หน้า + Women 7 หน้า, ระบบ Filter (Brand, Price, Sale), Sort, Breadcrumb, Quick Add</div>
+              </td>
+              <td>8,000</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                <div class="item-name">Frontend Development — 40+ หน้าเว็บ</div>
+                <div class="item-desc">Next.js 16 + React 19 + TypeScript — Shop, Product Detail, Brand Pages (9), About, Contact, FAQ, Blog, Community, Events, Account, Policies</div>
+              </td>
+              <td>20,000</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>
+                <div class="item-name">Shopify Storefront API Integration</div>
+                <div class="item-desc">เชื่อมต่อ Shopify: ระบบ Cart + Cart Drawer + Checkout, Dynamic Product Pages, Collection Pages เชื่อมต่อ Shopify Collections อัตโนมัติ</div>
+              </td>
+              <td>20,000</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="subtotal-row">
+              <td></td>
+              <td style="text-align: right; font-weight: 600; color: var(--gray-500);">มูลค่างานรวม</td>
+              <td style="color: var(--gray-500);">64,000</td>
+            </tr>
+            <tr class="discount-row">
+              <td></td>
+              <td style="text-align: right;">ส่วนลดพิเศษ (25%)</td>
+              <td>-16,000</td>
+            </tr>
+            <tr class="total-row">
+              <td></td>
+              <td style="text-align: right;">ราคาสุทธิ</td>
+              <td style="text-align: right; font-size: 18px;">&#3647;48,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="valid-badge">
+          <span class="dot"></span>
+          ราคานี้ยังไม่รวม VAT 7% &middot; ใบเสนอราคามีผล 30 วัน
+        </div>
+      </div>
+
+      <!-- Payment Terms -->
+      <div class="section">
+        <div class="section-heading">เงื่อนไขการชำระเงิน</div>
+        <div class="payment-boxes">
+          <div class="pay-box">
+            <div class="pay-label">งวดที่ 1</div>
+            <div class="pay-amount">&#3647;24,000</div>
+            <div class="pay-when">50% — ชำระเมื่อตกลงเริ่มงาน</div>
+          </div>
+          <div class="pay-box">
+            <div class="pay-label">งวดที่ 2</div>
+            <div class="pay-amount">&#3647;24,000</div>
+            <div class="pay-when">50% — ชำระเมื่อส่งมอบงาน + Approve</div>
+          </div>
+        </div>
+        <div class="payment-note">
+          รับชำระผ่านโอนธนาคาร / PromptPay &middot; ออกใบเสร็จรับเงินให้ทุกงวด
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="section">
+        <div class="section-heading">ระยะเวลาดำเนินงาน</div>
+        <div class="project-info">
+          <div class="project-card">
+            <div class="label">ระยะเวลา (แพ็คเกจ B)</div>
+            <div class="value">3-5 วันทำการ</div>
+          </div>
+          <div class="project-card">
+            <div class="label">เริ่มงาน</div>
+            <div class="value">หลังได้รับชำระงวดที่ 1 + ข้อมูลสินค้า</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+      <div class="footer-left">
+        QT-2026-001 &middot; TANN Shop E-Commerce &middot; หน้า 1/2
+      </div>
+      <div class="footer-right">
+        <span class="stamp">QUOTATION</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page page-break">
+
+    <div class="header" style="padding: 28px 48px;">
+      <div class="header-top" style="margin-bottom: 0;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="logo" style="font-size: 22px;">TANN</div>
+          <div style="font-size: 12px; color: var(--gray-400);">ใบเสนอราคา QT-2026-001</div>
+        </div>
+        <div style="font-size: 12px; color: var(--gray-400);">หน้า 2/2</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- Deliverables -->
+      <div class="section">
+        <div class="section-heading">สิ่งที่ลูกค้าจะได้รับ</div>
+        <div class="terms-grid">
+          <div class="terms-col">
+            <h4>เว็บไซต์ Landing Page</h4>
+            <div class="checklist">
+              <div class="check-item"><span class="check-box checked"></span> Source code ทั้งหมด (Next.js 16 + React 19)</div>
+              <div class="check-item"><span class="check-box checked"></span> 40+ หน้าเว็บ พร้อมใช้งาน</div>
+              <div class="check-item"><span class="check-box checked"></span> 10 Sections บน Homepage</div>
+              <div class="check-item"><span class="check-box checked"></span> Responsive ทุกขนาดหน้าจอ</div>
+              <div class="check-item"><span class="check-box checked"></span> Animations & Transitions</div>
+              <div class="check-item"><span class="check-box checked"></span> 9 Brand Pages</div>
+              <div class="check-item"><span class="check-box checked"></span> Blog, Community, Events</div>
+            </div>
+          </div>
+          <div class="terms-col">
+            <h4>Shopify Integration</h4>
+            <div class="checklist">
+              <div class="check-item"><span class="check-box checked"></span> ระบบ Cart + Cart Drawer</div>
+              <div class="check-item"><span class="check-box checked"></span> Shopify Storefront API</div>
+              <div class="check-item"><span class="check-box checked"></span> Dynamic Product Pages</div>
+              <div class="check-item"><span class="check-box checked"></span> 14 Collection Pages + Filter/Sort</div>
+              <div class="check-item"><span class="check-box checked"></span> Quick Add to Cart</div>
+              <div class="check-item"><span class="check-box checked"></span> Checkout ผ่าน Shopify</div>
+              <div class="check-item"><span class="check-box checked"></span> Free Revisions 2 รอบ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client Preparation -->
+      <div class="section">
+        <div class="section-heading">สิ่งที่ลูกค้าต้องเตรียม</div>
+        <div class="terms-grid">
+          <div class="terms-col">
+            <h4>ข้อมูลแบรนด์</h4>
+            <ul>
+              <li>โลโก้แบรนด์ (PNG/SVG ความละเอียดสูง)</li>
+              <li>ข้อมูลแบรนด์ (ชื่อ, คำอธิบาย, สี, โทน)</li>
+              <li>เนื้อหาสำหรับหน้า About, Contact</li>
+            </ul>
+          </div>
+          <div class="terms-col">
+            <h4>ข้อมูลสินค้า</h4>
+            <ul>
+              <li>รูปสินค้า (2-4 รูป/สินค้า)</li>
+              <li>ข้อมูลสินค้า (ชื่อ, ราคา, คำอธิบาย, ไซส์, สี)</li>
+              <li>รายละเอียด Shipping & Return Policy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exclusions -->
+      <div class="section">
+        <div class="section-heading">ขอบเขตงานที่ไม่รวม</div>
+        <div class="exclusion-list">
+          <div class="exclusion-item">การถ่ายภาพสินค้า / Product Photography</div>
+          <div class="exclusion-item">การเขียนเนื้อหา Copywriting (นอกเหนือจากที่มีอยู่แล้ว)</div>
+          <div class="exclusion-item">การทำ SEO เชิงลึก (Keyword Research, Link Building)</div>
+          <div class="exclusion-item">การทำ Google Ads / Facebook Ads</div>
+          <div class="exclusion-item">การออกแบบ Logo หรือ Branding</div>
+          <div class="exclusion-item">Custom features นอกเหนือจากที่ระบุ (คิดค่าใช้จ่ายเพิ่ม)</div>
+          <div class="exclusion-item">ค่า Shopify Subscription, Domain, Hosting</div>
+        </div>
+      </div>
+
+      <!-- Monthly Costs -->
+      <div class="section">
+        <div class="section-heading">ค่าใช้จ่ายรายเดือนของลูกค้า (แยกต่างหาก)</div>
+        <table class="monthly-table">
+          <thead>
+            <tr>
+              <th>รายการ</th>
+              <th style="text-align: right;">ราคาโดยประมาณ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shopify Basic Plan</td>
+              <td>~&#3647;1,000 / เดือน</td>
+            </tr>
+            <tr>
+              <td>Domain (.com)</td>
+              <td>~&#3647;400 / ปี</td>
+            </tr>
+            <tr>
+              <td>Vercel Hosting</td>
+              <td>ฟรี (Pro ~&#3647;700/เดือน)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Maintenance -->
+      <div class="section">
+        <div class="section-heading">Maintenance Plans (เพิ่มเติม)</div>
+        <div class="highlight-box">
+          <h4>หลังจบ Support 30 วัน สามารถเลือก Maintenance Plan ได้</h4>
+          <p>
+            <strong>Basic &#3647;3,000/เดือน</strong> — แก้ Bug + อัปเดต Security<br>
+            <strong>Standard &#3647;5,000/เดือน</strong> — Basic + แก้ไขเนื้อหา/รูปภาพ + เพิ่ม Collection<br>
+            <strong>Premium &#3647;8,000/เดือน</strong> — Standard + เพิ่มฟีเจอร์ใหม่ + Performance Optimization<br>
+            <span style="color: var(--gray-400); font-size: 11px;">สัญญาขั้นต่ำ 3 เดือน / ยกเลิกได้โดยแจ้งล่วงหน้า 30 วัน</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Signatures -->
+      <div class="signatures">
+        <div class="sig-block">
+          <div style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-500); font-weight: 600;">ผู้เสนอราคา</div>
+          <div class="sig-line"></div>
+          <div class="sig-name">NACK</div>
+          <div class="sig-role">Web Developer</div>
+          <div class="sig-date">วันที่: _____ / _____ / _____</div>
+        </div>
+        <div class="sig-block">
+          <div style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-500); font-weight: 600;">ผู้อนุมัติ</div>
+          <div class="sig-line"></div>
+          <div class="sig-name">____________________</div>
+          <div class="sig-role">TANN — เจ้าของแบรนด์</div>
+          <div class="sig-date">วันที่: _____ / _____ / _____</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+      <div class="footer-left">
+        QT-2026-001 &middot; TANN Shop E-Commerce &middot; หน้า 2/2
+      </div>
+      <div class="footer-right">
+        <span class="stamp">QUOTATION</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Auto-fill dates
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    document.getElementById('issueDate').textContent = today.toLocaleDateString('th-TH', options);
+
+    const validDate = new Date(today);
+    validDate.setDate(validDate.getDate() + 30);
+    document.getElementById('validDate').textContent = validDate.toLocaleDateString('th-TH', options);
+
+    // Package selection (interactive)
+    function selectPkg(el, pkg) {
+      document.querySelectorAll('.pkg').forEach(p => p.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+  </script>
+
+</body>
+</html>

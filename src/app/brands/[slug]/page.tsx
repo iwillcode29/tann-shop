@@ -16,10 +16,7 @@ const brands: Record<string, { name: string; description: string }> = {
     name: "Soar",
     description: "British running innovation.",
   },
-  satisfy: {
-    name: "Satisfy",
-    description: "Running luxury from Paris.",
-  },
+  // "satisfy" has its own dedicated page at /brands/satisfy
   ciele: {
     name: "Ciele",
     description: "Performance headwear.",

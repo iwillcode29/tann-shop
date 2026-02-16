@@ -409,7 +409,7 @@ export default function ProductPage() {
   if (notFound) {
     return (
       <main className="min-h-screen bg-white">
-        <Navigation />
+        <Navigation variant="dark" />
         <div className="pt-28 lg:pt-32 pb-16 lg:pb-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-3xl font-display font-bold text-[#0d0d0d] mb-4">
@@ -430,7 +430,7 @@ export default function ProductPage() {
 
   return (
     <main className="min-h-screen bg-white">
-      <Navigation />
+      <Navigation variant="dark" />
 
       <div className="pt-28 lg:pt-32 pb-16 lg:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

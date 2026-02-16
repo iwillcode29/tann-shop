@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TANN Shop — Project Presentation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+    :root {
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --accent: #e63946;
+      --accent-light: #ff6b6b;
+      --gray-50: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-300: #d4d4d4;
+      --gray-400: #a3a3a3;
+      --gray-500: #737373;
+      --gray-600: #525252;
+      --gray-700: #404040;
+      --gray-800: #262626;
+      --gray-900: #171717;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Slide Base */
+    .slide {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-inner {
+      max-width: 1200px;
+      width: 100%;
+      z-index: 2;
+    }
+
+    /* Navigation */
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 4px;
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .slide-number {
+      position: fixed;
+      bottom: 30px;
+      right: 40px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      color: var(--gray-500);
+      z-index: 100;
+      letter-spacing: 2px;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      z-index: 200;
+      transition: width 0.3s ease;
+    }
+
+    /* ---- SLIDE 1: Cover ---- */
+    .slide-cover {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #0d0d0d 100%);
+    }
+
+    .slide-cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230,57,70,0.08) 0%, transparent 70%);
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .cover-label {
+      font-size: 12px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .cover-title {
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 900;
+      letter-spacing: 8px;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .cover-subtitle {
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 300;
+      color: var(--gray-300);
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 40px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .cover-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cover-meta .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* ---- SLIDE 2: Overview ---- */
+    .slide-overview {
+      background: var(--gray-900);
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--gray-400);
+      line-height: 1.8;
+      max-width: 700px;
+      margin-bottom: 48px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .overview-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.4s;
+    }
+
+    .overview-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(230,57,70,0.3);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    /* ---- SLIDE 3: Features ---- */
+    .slide-features {
+      background: var(--black);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .feature-item:hover {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .feature-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 40px;
+    }
+
+    .feature-info h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .feature-info p {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .feature-showcase {
+      background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+      border-radius: 20px;
+      padding: 48px;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .showcase-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .showcase-stat:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .stat-value.accent { color: var(--accent); }
+
+    /* ---- SLIDE 4: Pages ---- */
+    .slide-pages {
+      background: linear-gradient(180deg, var(--gray-900) 0%, var(--black) 100%);
+    }
+
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .page-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 24px 20px;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .page-card:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+
+    .page-card .page-emoji {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .page-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .page-card p {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .page-count-banner {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(230,57,70,0.02));
+      border: 1px solid rgba(230,57,70,0.2);
+      border-radius: 16px;
+    }
+
+    .page-count-banner .big-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .page-count-banner p {
+      color: var(--gray-400);
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    /* ---- SLIDE 5: Tech Stack ---- */
+    .slide-tech {
+      background: var(--black);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .tech-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(230,57,70,0.3);
+    }
+
+    .tech-card:hover::after {
+      opacity: 1;
+    }
+
+    .tech-logo {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .tech-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .tech-version {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .tech-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* ---- SLIDE 6: Brands ---- */
+    .slide-brands {
+      background: var(--gray-900);
+    }
+
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .brand-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s;
+    }
+
+    .brand-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .brand-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .brand-origin {
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .brand-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* ---- SLIDE 7: Value ---- */
+    .slide-value {
+      background: var(--black);
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .value-card {
+      padding: 36px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .value-card.highlight {
+      background: linear-gradient(135deg, rgba(230,57,70,0.12), rgba(230,57,70,0.03));
+      border-color: rgba(230,57,70,0.3);
+    }
+
+    .value-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .value-card p {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    .value-card .check {
+      color: var(--accent);
+      margin-right: 8px;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+    }
+
+    .compare-table th, .compare-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 14px;
+    }
+
+    .compare-table th {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    .compare-table tr.us {
+      background: rgba(230,57,70,0.08);
+      border-radius: 8px;
+    }
+
+    .compare-table tr.us td {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .compare-table td.price {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .compare-table td.cons {
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    /* ---- SLIDE 8: Pricing ---- */
+    .slide-pricing {
+      background: linear-gradient(180deg, var(--gray-900) 0%, var(--black) 100%);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px 32px;
+      transition: all 0.4s;
+      position: relative;
+    }
+
+    .pricing-card.popular {
+      background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(230,57,70,0.02));
+      border-color: rgba(230,57,70,0.4);
+      transform: scale(1.03);
+    }
+
+    .pricing-card.popular::before {
+      content: 'แนะนำ';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 20px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .pricing-card.popular:hover {
+      transform: scale(1.03) translateY(-4px);
+    }
+
+    .pricing-tier {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+
+    .pricing-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .pricing-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .pricing-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gray-500);
+    }
+
+    .pricing-original {
+      font-size: 14px;
+      color: var(--gray-500);
+      text-decoration: line-through;
+      margin-bottom: 24px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .pricing-features li {
+      font-size: 13px;
+      color: var(--gray-300);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .pricing-features .icon-check {
+      color: var(--accent);
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pricing-features .icon-x {
+      color: var(--gray-600);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ---- SLIDE 9: Timeline ---- */
+    .slide-timeline {
+      background: var(--black);
+    }
+
+    .timeline {
+      display: flex;
+      gap: 0;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 34px;
+      left: 60px;
+      right: 60px;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .timeline-item {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin: 24px auto 24px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 20px rgba(230,57,70,0.3);
+    }
+
+    .timeline-step {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    .timeline-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      padding: 0 16px;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .payment-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .payment-card .pay-label {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+
+    .payment-card .pay-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .payment-card .pay-when {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 8px;
+    }
+
+    /* ---- SLIDE: Q&A ---- */
+    .slide-qa {
+      background: var(--gray-900);
+    }
+
+    .qa-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .qa-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .qa-item:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .qa-question {
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      user-select: none;
+    }
+
+    .qa-question h4 {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .qa-question .qa-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .qa-item.open .qa-question .qa-icon {
+      transform: rotate(45deg);
+    }
+
+    .qa-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .qa-item.open .qa-answer {
+      max-height: 300px;
+    }
+
+    .qa-answer-inner {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.8;
+    }
+
+    /* ---- SLIDE 10: CTA ---- */
+    .slide-cta {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 40%, #0d0d0d 100%);
+      text-align: center;
+    }
+
+    .slide-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230,57,70,0.06) 0%, transparent 70%);
+    }
+
+    .cta-title {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .cta-desc {
+      font-size: 18px;
+      color: var(--gray-400);
+      margin-bottom: 48px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .cta-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cta-contact .contact-item {
+      font-size: 16px;
+      color: var(--gray-300);
+    }
+
+    .cta-contact .contact-label {
+      color: var(--gray-500);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      text-decoration: none;
+      margin-top: 32px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(230,57,70,0.3);
+    }
+
+    /* Maintenance slide */
+    .maint-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .maint-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .maint-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .maint-card .maint-plan {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .maint-card .maint-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .maint-card .maint-per {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+    }
+
+    .maint-card .maint-features {
+      list-style: none;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .maint-card .maint-features li {
+      font-size: 13px;
+      color: var(--gray-400);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .maint-card .maint-features li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gray-600);
+    }
+
+    /* Keyboard hints */
+    .keyboard-hint {
+      position: fixed;
+      bottom: 30px;
+      left: 40px;
+      font-size: 12px;
+      color: var(--gray-600);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--gray-700);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+    .delay-6 { transition-delay: 0.6s; }
+    .delay-7 { transition-delay: 0.7s; }
+    .delay-8 { transition-delay: 0.8s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .slide { padding: 40px 24px; }
+      .nav-links { display: none; }
+      .overview-grid, .tech-grid, .pricing-grid, .brands-grid, .maint-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .pages-grid { grid-template-columns: repeat(2, 1fr); }
+      .value-grid { grid-template-columns: 1fr; }
+      .timeline { flex-direction: column; }
+      .timeline::before { display: none; }
+      .payment-grid { grid-template-columns: 1fr; }
+      .compare-table { font-size: 12px; }
+      .compare-table th, .compare-table td { padding: 10px 8px; }
+      .pricing-card.popular { transform: none; }
+      .pricing-card.popular:hover { transform: translateY(-4px); }
+      .keyboard-hint { display: none; }
+    }
+
+    /* Print */
+    @media print {
+      html { scroll-snap-type: none; }
+      .slide { min-height: auto; page-break-after: always; padding: 40px; }
+      .nav-bar, .slide-number, .progress-bar, .keyboard-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <div class="nav-logo">TANN</div>
+    <div class="nav-links">
+      <a href="#cover" class="active">Cover</a>
+      <a href="#overview">Overview</a>
+      <a href="#features">Features</a>
+      <a href="#pages">Pages</a>
+      <a href="#tech">Tech</a>
+      <!-- <a href="#brands">Brands</a> -->
+      <a href="#value">Value</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#qa">Q&A</a>
+      <a href="#cta">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Slide Number -->
+  <div class="slide-number" id="slideNumber">01 / 10</div>
+
+  <!-- Keyboard Hint -->
+  <div class="keyboard-hint">
+    <span class="key">&#8593;</span>
+    <span class="key">&#8595;</span>
+    <span>เลื่อนหน้า</span>
+  </div>
+
+  <!-- ==================== SLIDE 1: COVER ==================== -->
+  <section class="slide slide-cover" id="cover">
+    <div class="slide-inner">
+      <div class="cover-label fade-up">Project Proposal</div>
+      <h1 class="cover-title fade-up delay-1">TANN</h1>
+      <p class="cover-subtitle fade-up delay-2">Premium Running Apparel<br>E-Commerce Platform</p>
+      <div class="cover-meta fade-up delay-3">
+        <span><span class="dot"></span> Next.js 16 + React 19</span>
+        <span><span class="dot"></span> 40+ Pages</span>
+        <span><span class="dot"></span> Shopify Integration</span>
+        <span><span class="dot"></span> Mobile-First Design</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: OVERVIEW ==================== -->
+  <section class="slide slide-overview" id="overview">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Project Overview</div>
+      <h2 class="section-title fade-up delay-1">เว็บไซต์ E-Commerce<br>ระดับ Premium</h2>
+      <p class="section-desc fade-up delay-2">ออกแบบและพัฒนาเว็บไซต์สำหรับ TANN แบรนด์ Running Apparel ชั้นนำ ด้วยเทคโนโลยีล่าสุด รองรับการขายออนไลน์เต็มรูปแบบ พร้อมระบบ Shopify Integration</p>
+      <div class="overview-grid">
+        <div class="overview-card fade-up delay-3">
+          <div class="card-icon">&#9889;</div>
+          <div class="card-title">Performance</div>
+          <div class="card-text">โหลดเร็วเหนือระดับด้วย Next.js 16 Server Components, Image Optimization และ Code Splitting อัตโนมัติ</div>
+        </div>
+        <div class="overview-card fade-up delay-4">
+          <div class="card-icon">&#127912;</div>
+          <div class="card-title">Custom Design</div>
+          <div class="card-text">ออกแบบเฉพาะสำหรับ TANN ไม่ใช่ Template สำเร็จรูป สะท้อนภาพลักษณ์แบรนด์ Premium Running Apparel</div>
+        </div>
+        <div class="overview-card fade-up delay-5">
+          <div class="card-icon">&#128722;</div>
+          <div class="card-title">E-Commerce Ready</div>
+          <div class="card-text">พร้อมขายสินค้าทันทีเมื่อเชื่อมต่อ Shopify ระบบตะกร้า, Checkout, จัดการสินค้าครบจบ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: FEATURES ==================== -->
+  <section class="slide slide-features" id="features">
+    <div class="slide-inner">
+      <div class="features-grid">
+        <div>
+          <div class="section-label fade-up">Key Features</div>
+          <h2 class="section-title fade-up delay-1">ฟีเจอร์ที่สร้าง<br>เสร็จแล้ว</h2>
+          <div class="feature-list">
+            <div class="feature-item fade-up delay-2">
+              <div class="feature-num">01</div>
+              <div class="feature-info">
+                <h4>Responsive Design</h4>
+                <p>แสดงผลสมบูรณ์ทุกขนาดหน้าจอ — Mobile, Tablet, Desktop</p>
+              </div>
+            </div>
+            <div class="feature-item fade-up delay-3">
+              <div class="feature-num">02</div>
+              <div class="feature-info">
+                <h4>Advanced Filter & Sort</h4>
+                <p>กรองสินค้าตาม Brand, ราคา, หมวดหมู่ พร้อมเรียงลำดับได้หลายแบบ</p>
+              </div>
+            </div>
+            <div class="feature-item fade-up delay-4">
+              <div class="feature-num">03</div>
+              <div class="feature-info">
+                <h4>Shopping Cart System</h4>
+                <p>ระบบตะกร้าสินค้าพร้อม Cart Drawer, Quick Add, Quantity Control</p>
+              </div>
+            </div>
+            <div class="feature-item fade-up delay-5">
+              <div class="feature-num">04</div>
+              <div class="feature-info">
+                <h4>Premium Animations</h4>
+                <p>Micro-interactions และ transitions สร้างประสบการณ์การใช้งานที่ลื่นไหล</p>
+              </div>
+            </div>
+            <div class="feature-item fade-up delay-6">
+              <div class="feature-num">05</div>
+              <div class="feature-info">
+                <h4>Community & Events</h4>
+                <p>ระบบ Run Club, Events, Blog พร้อมสร้าง Community รอบแบรนด์</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-showcase fade-up delay-3">
+          <h3 style="font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray-500); margin-bottom: 8px;">Project Stats</h3>
+          <div class="showcase-stat">
+            <span class="stat-label">Total Pages</span>
+            <span class="stat-value accent">40+</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="stat-label">Homepage Sections</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="stat-label">Collection Pages</span>
+            <span class="stat-value">14</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="stat-label">Brand Pages</span>
+            <span class="stat-value">9</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="stat-label">Components</span>
+            <span class="stat-value">20+</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="stat-label">Responsive</span>
+            <span class="stat-value accent">100%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: PAGES ==================== -->
+  <section class="slide slide-pages" id="pages">
+    <div class="slide-inner">
+      <div class="section-label fade-up">All Pages</div>
+      <h2 class="section-title fade-up delay-1">หน้าเว็บทั้งหมดที่คุณจะได้รับ
+      </h2>
+
+      <div class="page-count-banner fade-up delay-2">
+        <div class="big-num">40+</div>
+        <p>หน้าเว็บ พร้อมใช้งาน พร้อมระบบ Shopify Integration</p>
+      </div>
+
+      <div class="pages-grid">
+        <div class="page-card fade-up delay-2">
+          <span class="page-emoji">&#127968;</span>
+          <h4>Landing Page</h4>
+          <p>Hero, Brands, Products, CTA</p>
+        </div>
+        <div class="page-card fade-up delay-3">
+          <span class="page-emoji">&#128085;</span>
+          <h4>Men's Collection</h4>
+          <p>7 หมวดหมู่ + Filter</p>
+        </div>
+        <div class="page-card fade-up delay-3">
+          <span class="page-emoji">&#128087;</span>
+          <h4>Women's Collection</h4>
+          <p>7 หมวดหมู่ + Filter</p>
+        </div>
+        <div class="page-card fade-up delay-4">
+          <span class="page-emoji">&#128717;</span>
+          <h4>Shop All</h4>
+          <p>Search + Filter + Sort</p>
+        </div>
+        <div class="page-card fade-up delay-4">
+          <span class="page-emoji">&#128083;</span>
+          <h4>Product Detail</h4>
+          <p>Gallery, Size, Cart</p>
+        </div>
+        <div class="page-card fade-up delay-5">
+          <span class="page-emoji">&#127942;</span>
+          <h4>Brand Pages</h4>
+          <p>9 แบรนด์ + Brand Index</p>
+        </div>
+        <div class="page-card fade-up delay-5">
+          <span class="page-emoji">&#128101;</span>
+          <h4>Community</h4>
+          <p>Run Club, Events, Stories</p>
+        </div>
+        <div class="page-card fade-up delay-6">
+          <span class="page-emoji">&#128196;</span>
+          <h4>Content Pages</h4>
+          <p>About, FAQ, Blog, Contact</p>
+        </div>
+        <div class="page-card fade-up delay-6">
+          <span class="page-emoji">&#128230;</span>
+          <h4>Policies</h4>
+          <p>Shipping, Returns, Terms</p>
+        </div>
+        <div class="page-card fade-up delay-7">
+          <span class="page-emoji">&#128100;</span>
+          <h4>Account</h4>
+          <p>Login, Track Order</p>
+        </div>
+        <div class="page-card fade-up delay-7">
+          <span class="page-emoji">&#128240;</span>
+          <h4>Blog</h4>
+          <p>Articles, Guides</p>
+        </div>
+        <div class="page-card fade-up delay-8">
+          <span class="page-emoji">&#127919;</span>
+          <h4>Sale & New</h4>
+          <p>Special Collections</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: TECH STACK ==================== -->
+  <section class="slide slide-tech" id="tech">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Technology</div>
+      <h2 class="section-title fade-up delay-1">เทคโนโลยีที่ใช้</h2>
+      <p class="section-desc fade-up delay-2">ใช้เทคโนโลยีเวอร์ชันล่าสุดที่บริษัทระดับโลกเลือกใช้ — เพื่อให้เว็บโหลดเร็ว, SEO ดี, และขยายขนาดได้ง่าย</p>
+
+      <div class="tech-grid">
+        <div class="tech-card fade-up delay-3">
+          <span class="tech-logo">&#9650;</span>
+          <div class="tech-name">Next.js</div>
+          <div class="tech-version">v16</div>
+          <div class="tech-desc">React Framework สำหรับ Production — Server Rendering, Routing, API Routes</div>
+        </div>
+        <div class="tech-card fade-up delay-4">
+          <span class="tech-logo">&#9883;</span>
+          <div class="tech-name">React</div>
+          <div class="tech-version">v19</div>
+          <div class="tech-desc">JavaScript Library สำหรับ UI — Server Components, Concurrent Features</div>
+        </div>
+        <div class="tech-card fade-up delay-5">
+          <span class="tech-logo">&#128295;</span>
+          <div class="tech-name">TypeScript</div>
+          <div class="tech-version">v5</div>
+          <div class="tech-desc">Type-safe JavaScript — ลดบั๊ก, ง่ายต่อการบำรุงรักษาและขยายระบบ</div>
+        </div>
+        <div class="tech-card fade-up delay-6">
+          <span class="tech-logo">&#127912;</span>
+          <div class="tech-name">Tailwind CSS</div>
+          <div class="tech-version">v4</div>
+          <div class="tech-desc">Utility-First CSS — สร้าง UI ได้อย่างรวดเร็ว, Performance สูง</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; display: flex; gap: 24px; flex-wrap: wrap;" class="fade-up delay-7">
+        <div style="flex:1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">E-Commerce</div>
+          <div style="font-weight: 600;">Shopify Storefront API</div>
+        </div>
+        <div style="flex:1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">Data Fetching</div>
+          <div style="font-weight: 600;">GraphQL + REST API</div>
+        </div>
+        <div style="flex:1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">Hosting</div>
+          <div style="font-weight: 600;">Vercel (Edge Network)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: BRANDS ==================== -->
+  <!--
+  <section class="slide slide-brands" id="brands">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Partner Brands</div>
+      <h2 class="section-title fade-up delay-1">แบรนด์พาร์ทเนอร์ 9 แบรนด์</h2>
+      <p class="section-desc fade-up delay-2">สร้างหน้า Brand Page เฉพาะสำหรับแต่ละแบรนด์ พร้อม Collection สินค้าและเรื่องราวของแบรนด์</p>
+
+      <div class="brands-grid">
+        <div class="brand-card fade-up delay-3">
+          <div class="brand-name">District Vision</div>
+          <div class="brand-origin">New York / Tokyo</div>
+          <div class="brand-desc">Performance eyewear & apparel สำหรับนักวิ่งที่ใส่ใจทั้งสไตล์และสมรรถนะ</div>
+        </div>
+        <div class="brand-card fade-up delay-3">
+          <div class="brand-name">Satisfy</div>
+          <div class="brand-origin">Paris</div>
+          <div class="brand-desc">Running luxury จากปารีส ผสมผสานแฟชั่นและเทคโนโลยีการวิ่งระดับสูง</div>
+        </div>
+        <div class="brand-card fade-up delay-4">
+          <div class="brand-name">Bandit Running</div>
+          <div class="brand-origin">New York</div>
+          <div class="brand-desc">Running collective จากนิวยอร์ก เน้น Community และดีไซน์ที่โดดเด่น</div>
+        </div>
+        <div class="brand-card fade-up delay-4">
+          <div class="brand-name">Soar</div>
+          <div class="brand-origin">United Kingdom</div>
+          <div class="brand-desc">British running innovation เน้นนวัตกรรมผ้าและการออกแบบเพื่อประสิทธิภาพ</div>
+        </div>
+        <div class="brand-card fade-up delay-5">
+          <div class="brand-name">Ciele</div>
+          <div class="brand-origin">Montreal</div>
+          <div class="brand-desc">Performance headwear specialists หมวกวิ่งที่นักวิ่งทั่วโลกไว้วางใจ</div>
+        </div>
+        <div class="brand-card fade-up delay-5">
+          <div class="brand-name">Tracksmith</div>
+          <div class="brand-origin">Boston</div>
+          <div class="brand-desc">Athletic excellence ที่ผสมผสานมรดกด้าน Track & Field กับเทคโนโลยีสมัยใหม่</div>
+        </div>
+        <div class="brand-card fade-up delay-6">
+          <div class="brand-name">On Running</div>
+          <div class="brand-origin">Switzerland</div>
+          <div class="brand-desc">Swiss performance running เทคโนโลยี CloudTec ที่ปฏิวัติวงการ</div>
+        </div>
+        <div class="brand-card fade-up delay-6">
+          <div class="brand-name">Hoka</div>
+          <div class="brand-origin">France</div>
+          <div class="brand-desc">Maximalist cushioning สำหรับนักวิ่งที่ต้องการความนุ่มสบายสูงสุด</div>
+        </div>
+        <div class="brand-card fade-up delay-7">
+          <div class="brand-name">Nnormal</div>
+          <div class="brand-origin">Spain</div>
+          <div class="brand-desc">Trail running brand โดย Kilian Jornet นักวิ่ง Ultra ระดับตำนาน</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ==================== SLIDE 7: VALUE ==================== -->
+  <section class="slide slide-value" id="value">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Why Choose Us</div>
+      <h2 class="section-title fade-up delay-1">ทำไมต้องเลือกเรา?</h2>
+      <p class="section-desc fade-up delay-2">เปรียบเทียบกับทางเลือกอื่นในตลาด</p>
+
+      <table class="compare-table fade-up delay-3">
+        <thead>
+          <tr>
+            <th>ทางเลือก</th>
+            <th>ราคา</th>
+            <th>ข้อจำกัด</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Shopify Theme สำเร็จรูป</td>
+            <td class="price">5K-15K</td>
+            <td class="cons">ดีไซน์ซ้ำกับร้านอื่น, ปรับแต่งยาก, โหลดช้า</td>
+          </tr>
+          <tr>
+            <td>Freelancer ทั่วไป</td>
+            <td class="price">20K-50K</td>
+            <td class="cons">คุณภาพไม่แน่นอน, ไม่มี Support</td>
+          </tr>
+          <tr>
+            <td>Web Agency</td>
+            <td class="price">100K-300K</td>
+            <td class="cons">ราคาสูง, ใช้เวลานาน</td>
+          </tr>
+          <tr class="us">
+            <td>TANN Shop (เรา)</td>
+            <td class="price" style="color: var(--accent);">30K-65K</td>
+            <td style="font-weight: 400; font-size: 13px;">Custom design, เทคโนโลยีล่าสุด, Support ครบ</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="value-grid" style="margin-top: 40px;">
+        <div class="value-card highlight fade-up delay-4">
+          <h4><span class="check">&#10003;</span> เทคโนโลยีล่าสุด</h4>
+          <p>Next.js 16 + React 19 ทำให้เว็บโหลดเร็ว, SEO ดี, รองรับ Traffic สูง</p>
+        </div>
+        <div class="value-card highlight fade-up delay-4">
+          <h4><span class="check">&#10003;</span> ดีไซน์ระดับ Premium</h4>
+          <p>ไม่ใช่ Template สำเร็จรูป — ออกแบบเฉพาะสำหรับ Brand ของคุณ</p>
+        </div>
+        <div class="value-card fade-up delay-5">
+          <h4><span class="check">&#10003;</span> Shopify Integration</h4>
+          <p>จัดการสินค้าง่าย, รับชำระเงินได้ทันที, ไม่ต้องเขียนโค้ดเพิ่ม</p>
+        </div>
+        <div class="value-card fade-up delay-5">
+          <h4><span class="check">&#10003;</span> Mobile-First</h4>
+          <p>70%+ ของลูกค้า E-commerce ใช้มือถือ — เว็บนี้รองรับอย่างสมบูรณ์</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 8: PRICING ==================== -->
+  <section class="slide slide-pricing" id="pricing">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Pricing</div>
+      <h2 class="section-title fade-up delay-1">แพ็คเกจราคา</h2>
+      <p class="section-desc fade-up delay-2">เลือกแพ็คเกจที่เหมาะกับความต้องการของคุณ</p>
+
+      <div class="pricing-grid">
+        <!-- Package A -->
+        <div class="pricing-card fade-up delay-3">
+          <div class="pricing-tier">Package A</div>
+          <div class="pricing-name">Landing Page Only</div>
+          <div class="pricing-price">&#3647;30,000</div>
+          <div class="pricing-original">มูลค่าจริง &#3647;44,000</div>
+          <ul class="pricing-features">
+            <li><span class="icon-check">&#10003;</span> Source code ทั้งหมด</li>
+            <li><span class="icon-check">&#10003;</span> 40+ หน้าเว็บ พร้อมใช้งาน</li>
+            <li><span class="icon-check">&#10003;</span> เอกสาร README</li>
+            <li><span class="icon-check">&#10003;</span> Free revisions 1 รอบ</li>
+            <li><span class="icon-x">&#10005;</span> ไม่รวม Shopify Integration</li>
+            <li><span class="icon-x">&#10005;</span> ไม่รวม Deploy</li>
+          </ul>
+        </div>
+
+        <!-- Package B -->
+        <div class="pricing-card fade-up delay-4">
+          <div class="pricing-tier">Package B</div>
+          <div class="pricing-name">+ Shopify Integration</div>
+          <div class="pricing-price">&#3647;48,000</div>
+          <div class="pricing-original">มูลค่าจริง &#3647;64,000</div>
+          <ul class="pricing-features">
+            <li><span class="icon-check">&#10003;</span> ทุกอย่างในแพ็ค A</li>
+            <li><span class="icon-check">&#10003;</span> ระบบ Cart + Checkout</li>
+            <li><span class="icon-check">&#10003;</span> Shopify Storefront API</li>
+            <li><span class="icon-check">&#10003;</span> Dynamic Product Pages</li>
+            <li><span class="icon-check">&#10003;</span> 14 Collection Pages + Filter</li>
+            <li><span class="icon-check">&#10003;</span> Quick Add to Cart</li>
+            <li><span class="icon-check">&#10003;</span> Free revisions 2 รอบ</li>
+          </ul>
+        </div>
+
+        <!-- Package C -->
+        <div class="pricing-card popular fade-up delay-5">
+          <div class="pricing-tier">Package C</div>
+          <div class="pricing-name">Full Package</div>
+          <div class="pricing-price">&#3647;65,000</div>
+          <div class="pricing-original">มูลค่าจริง &#3647;79,000</div>
+          <ul class="pricing-features">
+            <li><span class="icon-check">&#10003;</span> ทุกอย่างในแพ็ค B</li>
+            <li><span class="icon-check">&#10003;</span> Setup Shopify Store</li>
+            <li><span class="icon-check">&#10003;</span> Deploy ขึ้น Vercel</li>
+            <li><span class="icon-check">&#10003;</span> Custom Domain + SSL</li>
+            <li><span class="icon-check">&#10003;</span> สอนใช้งาน 1 ชั่วโมง</li>
+            <li><span class="icon-check">&#10003;</span> Support หลังขาย 30 วัน</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Maintenance Plans -->
+      <div style="margin-top: 56px;">
+        <h3 class="fade-up delay-6" style="font-size: 20px; font-weight: 600; margin-bottom: 24px;">Maintenance Plans <span style="font-size: 13px; color: var(--gray-500); font-weight: 400;">(เพิ่มเติม)</span></h3>
+        <div class="maint-grid">
+          <div class="maint-card fade-up delay-6">
+            <div class="maint-plan">Basic</div>
+            <div class="maint-price">&#3647;3,000</div>
+            <div class="maint-per">/ เดือน</div>
+            <ul class="maint-features">
+              <li>แก้ Bug</li>
+              <li>อัปเดต Security</li>
+            </ul>
+          </div>
+          <div class="maint-card fade-up delay-7">
+            <div class="maint-plan">Standard</div>
+            <div class="maint-price">&#3647;5,000</div>
+            <div class="maint-per">/ เดือน</div>
+            <ul class="maint-features">
+              <li>ทุกอย่างใน Basic</li>
+              <li>แก้ไขเนื้อหา/รูปภาพ</li>
+              <li>เพิ่ม Collection ใหม่</li>
+            </ul>
+          </div>
+          <div class="maint-card fade-up delay-8">
+            <div class="maint-plan">Premium</div>
+            <div class="maint-price">&#3647;8,000</div>
+            <div class="maint-per">/ เดือน</div>
+            <ul class="maint-features">
+              <li>ทุกอย่างใน Standard</li>
+              <li>เพิ่มฟีเจอร์ใหม่</li>
+              <li>Performance Optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: TIMELINE ==================== -->
+  <section class="slide slide-timeline" id="timeline">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Process</div>
+      <h2 class="section-title fade-up delay-1">ขั้นตอนและระยะเวลา</h2>
+      <p class="section-desc fade-up delay-2">ขั้นตอนการทำงานที่โปร่งใสและรวดเร็ว</p>
+
+      <div class="timeline fade-up delay-3">
+        <div class="timeline-item">
+          <div class="timeline-step">Step 1</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">ตกลงเริ่มงาน</div>
+          <div class="timeline-desc">เลือกแพ็คเกจ ชำระเงินงวดแรก 50% เตรียมข้อมูลแบรนด์</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">Step 2</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Customization</div>
+          <div class="timeline-desc">ปรับแต่งตามแบรนด์ ใส่โลโก้ สี เนื้อหา และรูปสินค้า</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">Step 3</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Integration</div>
+          <div class="timeline-desc">เชื่อมต่อ Shopify, ทดสอบระบบ Cart, Checkout, Payment</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">Step 4</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Launch!</div>
+          <div class="timeline-desc">Deploy ขึ้น Vercel, เชื่อม Domain, สอนใช้งาน, พร้อมขาย!</div>
+        </div>
+      </div>
+
+      <div class="payment-grid fade-up delay-4">
+        <div class="payment-card">
+          <div class="pay-label">งวดที่ 1</div>
+          <div class="pay-amount">50%</div>
+          <div class="pay-when">ชำระเมื่อตกลงเริ่มงาน</div>
+        </div>
+        <div class="payment-card">
+          <div class="pay-label">งวดที่ 2</div>
+          <div class="pay-amount">50%</div>
+          <div class="pay-when">ชำระเมื่อส่งมอบงาน + Approve</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 32px; font-size: 14px; color: var(--gray-500);" class="fade-up delay-5">
+        รับชำระผ่านโอนธนาคาร / PromptPay &middot; ออกใบเสร็จรับเงินทุกงวด
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE: Q&A ==================== -->
+  <section class="slide slide-qa" id="qa">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Q&A</div>
+      <h2 class="section-title fade-up delay-1">คำถามที่พบบ่อย</h2>
+
+      <div class="qa-list">
+        <div class="qa-item open fade-up delay-2" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>เว็บสร้างเสร็จแล้วจริงหรือ? ดูตัวอย่างได้ไหม?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">สร้างเสร็จแล้วครับ สามารถดู Demo ได้ทันที ทุกหน้า ทุกฟีเจอร์ที่เสนอพร้อมใช้งาน แค่ใส่ข้อมูลแบรนด์และสินค้าของคุณก็เปิดขายได้เลย</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-3" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>ต้องมีความรู้ด้านเทคนิคไหม?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">ไม่ต้องเลยครับ จัดการสินค้าทั้งหมดผ่าน Shopify Admin ซึ่งใช้งานง่ายมาก เพิ่มสินค้า แก้ราคา จัดการ Collection ได้ด้วยตัวเอง พร้อมสอนใช้งาน 1 ชั่วโมงใน Full Package</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-4" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>ใช้เวลานานแค่ไหนกว่าเว็บจะพร้อมเปิดขาย?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">แพ็ค A ส่งมอบได้ทันที / แพ็ค B ใช้เวลา 3-5 วันทำการ / แพ็ค C ใช้เวลา 5-7 วันทำการ หลังจากได้รับข้อมูลสินค้าและชำระเงินงวดแรก</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-5" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>มีค่าใช้จ่ายรายเดือนอะไรบ้าง?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">Shopify Basic ประมาณ 1,000 บาท/เดือน, Domain ประมาณ 400 บาท/ปี, Vercel Hosting ฟรี (หรือ Pro ประมาณ 700 บาท/เดือน) — ค่าใช้จ่ายเหล่านี้แยกต่างหากจากราคาแพ็คเกจ</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-5" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>ถ้าอยากแก้ไขหรือเพิ่มฟีเจอร์ทีหลังได้ไหม?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">ได้ครับ แก้ไขเล็กน้อย 500-1,500 บาท / เพิ่มหน้าใหม่ 2,000-5,000 บาท / เพิ่มฟีเจอร์ใหม่ 3,000-10,000 บาท หรือเลือก Maintenance Plan รายเดือนเพื่อดูแลต่อเนื่อง</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-6" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>ทำไมไม่ใช้ Shopify Theme สำเร็จรูปแทน?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">Shopify Theme สำเร็จรูปมีดีไซน์ซ้ำกับร้านอื่น ปรับแต่งได้จำกัด และโหลดช้ากว่า เว็บนี้ใช้ Next.js 16 ซึ่งเร็วกว่ามาก, SEO ดีกว่า, และออกแบบเฉพาะสำหรับแบรนด์ของคุณ</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-6" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>Source code เป็นของเราเลยไหม?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">เป็นของคุณ 100% ครับ หลังส่งมอบและชำระครบ คุณได้รับ Source code ทั้งหมด สามารถนำไปพัฒนาต่อ หรือจ้างคนอื่นดูแลได้เลย ไม่มี lock-in ใด ๆ</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-7" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>รับชำระเงินผ่านช่องทางไหนได้บ้าง?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">Shopify รองรับ Visa, Mastercard, American Express, PayPal และสามารถเพิ่ม Payment Gateway ของไทยได้ เช่น PromptPay, QR Payment, โอนธนาคาร ผ่าน Shopify Apps</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-7" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>เว็บรองรับ SEO ไหม? จะติดอันดับ Google ได้เลยหรือเปล่า?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">Next.js 16 รองรับ SEO ดีมาก ทั้ง Server-Side Rendering, Meta Tags, Sitemap, โหลดเร็ว ซึ่งเป็นปัจจัยที่ Google ให้ความสำคัญ แต่การติดอันดับต้องอาศัยเนื้อหาดี ๆ และทำ SEO อย่างต่อเนื่องด้วยครับ</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-8" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>ถ้าวันนึงอยากเปลี่ยน Developer ทำได้ไหม?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">ทำได้เลยครับ โค้ดใช้เทคโนโลยีมาตรฐาน (Next.js, React, TypeScript) ที่ Developer ทั่วโลกใช้กัน พร้อมเอกสาร README ไม่มีระบบปิดกั้น คุณเป็นเจ้าของ Source code เต็มที่</div>
+          </div>
+        </div>
+        <div class="qa-item fade-up delay-8" onclick="toggleQA(this)">
+          <div class="qa-question">
+            <h4>ถ้าไม่ต้องการบาง Feature ลดราคาได้ไหม?</h4>
+            <span class="qa-icon">+</span>
+          </div>
+          <div class="qa-answer">
+            <div class="qa-answer-inner">เว็บไซต์สร้างเสร็จแล้วทั้งระบบ ราคาที่เสนอคือราคา Package รวม ซึ่งลดจากมูลค่าจริงมาแล้วกว่า 18-32% ครับ ถ้ายังไม่ต้องการใช้ Feature บางอย่าง เราซ่อนไว้ให้ได้เลย แล้วเปิดใช้ทีหลังได้ตลอดโดยไม่มีค่าใช้จ่ายเพิ่ม</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: CTA ==================== -->
+  <section class="slide slide-cta" id="cta">
+    <div class="slide-inner">
+      <div class="section-label fade-up">Let's Start</div>
+      <h2 class="cta-title fade-up delay-1">พร้อมเริ่มต้น<br>กันเลย</h2>
+      <p class="cta-desc fade-up delay-2">เว็บไซต์สร้างเสร็จแล้ว พร้อมปรับแต่งและเชื่อมต่อ Shopify ให้คุณขายสินค้าได้ทันที</p>
+      <div class="cta-contact fade-up delay-3">
+        <div>
+          <div class="contact-label">Developed by</div>
+          <div class="contact-item" style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 20px;">NACK</div>
+        </div>
+      </div>
+      <a href="#pricing" class="btn-primary fade-up delay-4">ดูแพ็คเกจราคา</a>
+    </div>
+  </section>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    // Intersection Observer for fade animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Progress bar & slide number
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progressBar');
+    const slideNumber = document.getElementById('slideNumber');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const slideObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(slides).indexOf(entry.target);
+          const num = String(idx + 1).padStart(2, '0');
+          slideNumber.textContent = `${num} / ${String(slides.length).padStart(2, '0')}`;
+          progressBar.style.width = `${((idx + 1) / slides.length) * 100}%`;
+
+          // Update nav
+          navLinks.forEach(link => link.classList.remove('active'));
+          const id = entry.target.id;
+          const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+          if (activeLink) activeLink.classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    slides.forEach(slide => slideObserver.observe(slide));
+
+    // Q&A accordion toggle
+    function toggleQA(el) {
+      el.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>

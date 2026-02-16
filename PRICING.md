@@ -9,8 +9,7 @@
 | UI/UX Design (10 sections) | 15,000 |
 | Responsive Design (Mobile/Tablet/Desktop) | 5,000 |
 | Animations & Micro-interactions | 4,000 |
-| Collection Pages (14 หน้า + Filter System) | 8,000 |
-| **รวมมูลค่างานออกแบบ** | **32,000** |
+| **รวมมูลค่างานออกแบบ** | **24,000** |
 
 ---
 
@@ -56,17 +55,17 @@
 
 | แพ็คเกจ | รายละเอียด | ราคา (THB) |
 |---------|-----------|------------|
-| **A. Landing Page Only** | เว็บไซต์ตามที่เป็นอยู่ + Source code | **35,000** |
-| **B. + Shopify Integration** | แพ็ค A + เชื่อมต่อ Shopify + ระบบ Cart + Collection Pages | **55,000** |
-| **C. Full Package** | แพ็ค B + ช่วย Setup Shopify + Deploy + สอนใช้งาน | **75,000** |
+| **A. Landing Page Only** | เว็บไซต์ตามที่เป็นอยู่ + Source code | **30,000** |
+| **B. + Shopify Integration** | แพ็ค A + เชื่อมต่อ Shopify + ระบบ Cart + Collection Pages | **48,000** |
+| **C. Full Package** | แพ็ค B + ช่วย Setup Shopify + Deploy + สอนใช้งาน | **65,000** |
 
-> **หมายเหตุ:** ราคาแพ็คเกจรวมมูลค่างานออกแบบ 32,000 บาท ไว้แล้ว
+> **หมายเหตุ:** ราคาแพ็คเกจรวมมูลค่างานออกแบบ 24,000 บาท ไว้แล้ว
 
 ---
 
 ## รายละเอียดแต่ละแพ็คเกจ
 
-### A. Landing Page Only (35,000 บาท)
+### A. Landing Page Only (30,000 บาท)
 - ✅ Source code ทั้งหมด
 - ✅ เอกสาร README
 - ✅ หน้าเว็บทั้งหมด 40+ หน้า (Landing, About, Contact, FAQ, Blog, etc.)
@@ -75,7 +74,7 @@
 - ❌ ไม่รวม Deploy
 - ❌ สินค้าเป็น placeholder (ยังไม่เชื่อมต่อ Shopify)
 
-### B. With Shopify Integration (55,000 บาท)
+### B. With Shopify Integration (48,000 บาท)
 - ✅ ทุกอย่างในแพ็ค A
 - ✅ ระบบ Cart + Cart Drawer + Checkout
 - ✅ เชื่อมต่อ Shopify Storefront API
@@ -86,7 +85,7 @@
 - ❌ ไม่รวมค่า Shopify subscription
 - ❌ ไม่รวม Deploy
 
-### C. Full Package (75,000 บาท)
+### C. Full Package (65,000 บาท)
 - ✅ ทุกอย่างในแพ็ค B
 - ✅ ช่วย Setup Shopify store (สร้าง Collections, ใส่สินค้า)
 - ✅ Deploy ขึ้น Vercel
@@ -125,9 +124,9 @@
 
 | แพ็คเกจ | มูลค่างาน | ราคาขาย | ส่วนลด |
 |---------|----------|---------|--------|
-| A. Landing Page Only | Design 32K + Dev 20K = **52,000** | **35,000** | 33% |
-| B. + Shopify Integration | 52K + Integration 25K = **77,000** | **55,000** | 29% |
-| C. Full Package | 77K + Service 20K = **97,000** | **75,000** | 23% |
+| A. Landing Page Only | Design 24K + Dev 20K = **44,000** | **30,000** | 32% |
+| B. + Shopify Integration | 44K + Integration 20K = **64,000** | **48,000** | 25% |
+| C. Full Package | 64K + Service 15K = **79,000** | **65,000** | 18% |
 
 ---
 
@@ -201,7 +200,7 @@
 | Shopify Theme สำเร็จรูป | 5,000-15,000 บาท | ดีไซน์ซ้ำกับร้านอื่น, ปรับแต่งยาก, โหลดช้า |
 | Web Agency ทั่วไป | 100,000-300,000 บาท | ราคาสูง, ใช้เวลานาน |
 | Freelancer ทั่วไป | 20,000-50,000 บาท | คุณภาพไม่แน่นอน, ไม่มี Support |
-| **TANN Shop (เรา)** | **35,000-75,000 บาท** | **Custom design, เทคโนโลยีล่าสุด, Support ครบ** |
+| **TANN Shop (เรา)** | **30,000-65,000 บาท** | **Custom design, เทคโนโลยีล่าสุด, Support ครบ** |
 
 ---
 
